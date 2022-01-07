@@ -1,7 +1,9 @@
 // // How to set it up
 // var commandLineArgs = process.argv;
 
-const { profile } = require("console");
+const { fstat } = require("fs");
+
+// const { profile } = require("console");
 
 // // Use const for variables that should never be reassigned
 // const profileDataArgs = process.argv.slice(2, process.argv.length);
@@ -26,18 +28,21 @@ const { profile } = require("console");
 // };
 // printProfileData(profileDataArgs);
 
+const fs = require('fs');
 
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+//This statement object in module.exports assingment will be reassigned to generatepage
+const generatePage = require('./src/page-template.js');
 
-const name = profileDataArgs[0];
-const github = profileDataArgs[1];
+const profileDataArgs = process.argv.slice(2); 
 
-console.log(generatePage(name, github));
+const [name, github] = profileDataArgs;
 
-const generatePage = (userName, githubName) => {
-    return `
-      Name: ${userName}
-      GitHub: ${githubName}
-    `;
-  };
-console.log(generatePage('Jane', 'janehub'));
+
+// When an arrow function has one argument, parentheses are optional. 
+//However, when there are no arguments—or more than one—parentheses are necessary.
+fs.writeFile('./index.html', generatePage(name, github), err => {
+    // if an error exist, an error message is displayed
+    if (err) throw new Error(err);
+
+    console.log('Portfolio complete! Check out index.html to see the output!');
+});
