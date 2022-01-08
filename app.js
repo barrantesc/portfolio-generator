@@ -30,12 +30,14 @@ const { fstat } = require("fs");
 
 const fs = require('fs');
 
-//This statement object in module.exports assingment will be reassigned to generatepage
+//This statement object in module.exports assignment will be reassigned to generatePage
 const generatePage = require('./src/page-template.js');
 
 const profileDataArgs = process.argv.slice(2); 
+console.log(profileDataArgs);
 
 const [name, github] = profileDataArgs;
+console.log(name, github);
 
 
 // When an arrow function has one argument, parentheses are optional. 
