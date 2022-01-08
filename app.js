@@ -28,23 +28,39 @@ const { fstat } = require("fs");
 // };
 // printProfileData(profileDataArgs);
 
-const fs = require('fs');
 
-//This statement object in module.exports assignment will be reassigned to generatePage
-const generatePage = require('./src/page-template.js');
+const inquirer = require('inquirer');
 
-const profileDataArgs = process.argv.slice(2); 
-console.log(profileDataArgs);
+inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name?'
+        }
+    ])
+    .then(answers => console.log(answers));
 
-const [name, github] = profileDataArgs;
-console.log(name, github);
+// const fs = require('fs');
 
+// //This statement object in module.exports assignment will be reassigned to generatePage
+// const generatePage = require('./src/page-template');
 
-// When an arrow function has one argument, parentheses are optional. 
-//However, when there are no arguments—or more than one—parentheses are necessary.
-fs.writeFile('./index.html', generatePage(name, github), err => {
-    // if an error exist, an error message is displayed
-    if (err) throw new Error(err);
+// // const profileDataArgs = process.argv.slice(2); 
+// // console.log(profileDataArgs);
 
-    console.log('Portfolio complete! Check out index.html to see the output!');
-});
+// // const [name, github] = profileDataArgs;
+// // console.log(name, github);
+
+// const pageHTML = generatePage(name, github);
+
+// // When an arrow function has one argument, parentheses are optional. 
+// //However, when there are no arguments—or more than one—parentheses are necessary.
+// // fs.writeFile('./index.html', generatePage(name, github), err => {
+//     fs.writeFile('./index.html', pageHTML, err => {
+//     // if an error exist, an error message is displayed
+//     // if (err) throw new Error(err);
+//     if (err) throw err;
+
+//     console.log('Portfolio complete! Check out index.html to see the output!');
+// });
